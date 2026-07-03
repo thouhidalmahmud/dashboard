@@ -526,7 +526,7 @@ export default function DemoForm() {
                       <field.Field>
                         <field.FieldLabel>Text Formatting</field.FieldLabel>
                         <ToggleGroup
-                          type='multiple'
+                          multiple
                           variant='outline'
                           value={values}
                           onValueChange={(val) => field.form.setFieldValue('formatting', val)}
