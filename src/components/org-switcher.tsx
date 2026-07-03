@@ -91,7 +91,7 @@ export function OrgSwitcher() {
           <SidebarMenuButton
             size='lg'
             onClick={() => router.push('/dashboard/workspaces')}
-            className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
+            className='data-popup-open:bg-sidebar-accent data-popup-open:text-sidebar-accent-foreground'
           >
             <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 shrink-0 items-center justify-center overflow-hidden rounded-lg'>
               <Icons.add className='size-4' />
@@ -130,45 +130,47 @@ export function OrgSwitcher() {
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size='lg'
-              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
-            >
-              <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 shrink-0 items-center justify-center overflow-hidden rounded-lg'>
-                {displayOrganization.hasImage && displayOrganization.imageUrl ? (
-                  <Image
-                    src={displayOrganization.imageUrl}
-                    alt={displayOrganization.name}
-                    width={32}
-                    height={32}
-                    className='size-full object-cover'
-                  />
-                ) : (
-                  <Icons.galleryVerticalEnd className='size-4' />
-                )}
-              </div>
-              <div
-                className={`grid flex-1 text-left text-sm leading-tight transition-all duration-200 ease-in-out ${
-                  state === 'collapsed'
-                    ? 'invisible max-w-0 overflow-hidden opacity-0'
-                    : 'visible max-w-full opacity-100'
-                }`}
-              >
-                <span className='truncate font-medium'>{displayOrganization.name}</span>
-                <span className='text-muted-foreground truncate text-xs'>
-                  {userMemberships.data.find((m) => m.organization.id === displayOrganization.id)
-                    ?.role || 'Organization'}
-                </span>
-              </div>
-              <Icons.chevronsUpDown
-                className={`ml-auto transition-all duration-200 ease-in-out ${
-                  state === 'collapsed'
-                    ? 'invisible max-w-0 opacity-0'
-                    : 'visible max-w-full opacity-100'
-                }`}
+          <DropdownMenuTrigger
+            render={
+              <SidebarMenuButton
+                size='lg'
+                className='data-popup-open:bg-sidebar-accent data-popup-open:text-sidebar-accent-foreground'
               />
-            </SidebarMenuButton>
+            }
+          >
+            <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 shrink-0 items-center justify-center overflow-hidden rounded-lg'>
+              {displayOrganization.hasImage && displayOrganization.imageUrl ? (
+                <Image
+                  src={displayOrganization.imageUrl}
+                  alt={displayOrganization.name}
+                  width={32}
+                  height={32}
+                  className='size-full object-cover'
+                />
+              ) : (
+                <Icons.galleryVerticalEnd className='size-4' />
+              )}
+            </div>
+            <div
+              className={`grid flex-1 text-left text-sm leading-tight transition-all duration-200 ease-in-out ${
+                state === 'collapsed'
+                  ? 'invisible max-w-0 overflow-hidden opacity-0'
+                  : 'visible max-w-full opacity-100'
+              }`}
+            >
+              <span className='truncate font-medium'>{displayOrganization.name}</span>
+              <span className='text-muted-foreground truncate text-xs'>
+                {userMemberships.data.find((m) => m.organization.id === displayOrganization.id)
+                  ?.role || 'Organization'}
+              </span>
+            </div>
+            <Icons.chevronsUpDown
+              className={`ml-auto transition-all duration-200 ease-in-out ${
+                state === 'collapsed'
+                  ? 'invisible max-w-0 opacity-0'
+                  : 'visible max-w-full opacity-100'
+              }`}
+            />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className='w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg'

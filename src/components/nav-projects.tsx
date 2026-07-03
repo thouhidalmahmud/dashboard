@@ -43,11 +43,9 @@ export function NavProjects({
               </a>
             </SidebarMenuButton>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuAction showOnHover>
-                  <Icons.dots />
-                  <span className='sr-only'>More</span>
-                </SidebarMenuAction>
+              <DropdownMenuTrigger render={<SidebarMenuAction showOnHover />}>
+                <Icons.dots />
+                <span className='sr-only'>More</span>
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 className='w-48 rounded-lg'
