@@ -102,7 +102,7 @@ export default function SheetProductForm() {
                         <Select
                           name={field.name}
                           value={field.state.value}
-                          onValueChange={field.handleChange}
+                          onValueChange={(value) => field.handleChange(value ?? '')}
                         >
                           <SelectTrigger id={field.name} aria-invalid={isInvalid}>
                             <SelectValue placeholder='Select category' />
