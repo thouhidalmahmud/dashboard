@@ -53,10 +53,12 @@ Baseline (before migration): `tsc --noEmit` clean. Final: `tsc --noEmit` clean,
 
 ## FLAGGED for the user (not fixed, by design)
 
-1. **components.json still says `"style": "new-york"`** — a legacy style the CLI
-   reads as radix. Future `npx shadcn add <component>` will deliver RADIX
-   variants. Either switch the project to a `base-<style>` (restyles the app) or
-   add future components manually. Your call.
+1. ~~components.json style~~ RESOLVED (user request, follow-up commit): style
+   switched `new-york` → `base-nova`, so `npx shadcn add` now delivers Base UI
+   variants with tabler icons. Note: newly added components arrive with the
+   NOVA look (nova radii/spacing/typography), while the migrated components
+   keep their original new-york-era styling — expect cosmetic drift on new
+   additions until classes are aligned by hand.
 2. Behavior deltas flagged per component report, most notable:
    - tabs: keyboard activation now manual (Base UI default);
    - dropdown/context/menubar checkbox+radio items no longer close on click;
