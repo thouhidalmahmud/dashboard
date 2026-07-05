@@ -84,7 +84,7 @@ export default function AppSidebar() {
                         {item.items?.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton
-                              render={<Link href={subItem.url} />}
+                              render={<Link href={subItem.url} aria-label={subItem.title} />}
                               isActive={pathname === subItem.url}
                             >
                               <span>{subItem.title}</span>
@@ -97,7 +97,7 @@ export default function AppSidebar() {
                 ) : (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
-                      render={<Link href={item.url} />}
+                      render={<Link href={item.url} aria-label={item.title} />}
                       tooltip={item.title}
                       isActive={pathname === item.url}
                     >
