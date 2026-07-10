@@ -3,6 +3,16 @@
 2026-07-04, transformation engine (legacy style `new-york`; stock wrapper). Content →
 Panel with the base-registry animation placement. Typecheck clean.
 
+FIX 2026-07-11 (code review): the animation never worked - tw-animate-css's
+accordion keyframes read only `--radix-accordion-content-height` (Base UI sets
+`--accordion-panel-height`), resolving to non-interpolable `auto`; and the
+inner-div `data-starting-style:h-0 data-ending-style:h-0` classes were dead
+(Base UI emits those attributes on the Panel only). Fixed by redefining the
+accordion keyframes in src/styles/globals.css with a
+`var(--radix-..., var(--accordion-panel-height, auto))` fallback (what
+shadcn/tailwind.css does for base styles) and dropping the dead inner-div
+classes.
+
 ## Changed
 
 - `src/components/ui/accordion.tsx` — import → `@base-ui/react/accordion`; types →
