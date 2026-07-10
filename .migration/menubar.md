@@ -4,6 +4,13 @@
 consumers). Radix Menubar → Base UI `Menubar` (callable root) + `Menu.*` for
 everything else. Typecheck clean.
 
+FIX 2026-07-11 (code review): MenubarContent gained `data-closed:animate-out`
+plus `max-h-(--available-height) overflow-x-hidden overflow-y-auto` for parity
+with dropdown/context menus - without animate-out the kept fade/zoom exit
+utilities were inert, and MenubarSubContent (which composes MenubarContent) had
+lost the exit animation it had on main. Also removed the redundant
+`data-highlighted:*` twins (see dropdown-menu report).
+
 ## Changed
 
 - `src/components/ui/menubar.tsx` — root from `@base-ui/react/menubar` (single

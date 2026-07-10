@@ -13,6 +13,15 @@ Fixed at all six floating call sites by wrapping the label in
 imports). Same latent constraint applies to the unused ContextMenuLabel/
 MenubarLabel wrappers — future call sites must group them too.
 
+FIX 2026-07-11 (code review): (1) data-table-column-header.tsx DOES use
+DropdownMenuCheckboxItem for Asc/Desc/Hide (the earlier 'no call sites' claim in
+this report was wrong) - added `closeOnClick` to those three call sites so the
+menu closes after the action, wrapper default unchanged. (2) Removed the
+`data-highlighted:*` twins added during migration from dropdown-menu/context-menu/
+menubar/select items: Base UI menu items receive real DOM focus when highlighted,
+so the radix-era `focus:*` classes fire on hover/keyboard already (upstream
+base-nova ships focus: only).
+
 ## Changed
 
 - `src/components/ui/dropdown-menu.tsx` — import → `@base-ui/react/menu`.
