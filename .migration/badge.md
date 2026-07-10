@@ -4,6 +4,11 @@
 asChild idiom → `useRender` + `mergeProps` (non-button polymorphic per the worked
 example). Typecheck clean.
 
+FIX 2026-07-11 (code review): removed the 'use client' directive (also from
+breadcrumb.tsx and button-group.tsx) - Base UI's useRender is RSC-safe by design
+and the base registry ships these files without the directive; server components
+(e.g. the overview layout's badges) no longer hydrate them.
+
 ## Changed
 
 - `src/components/ui/badge.tsx` — `Slot` from `@radix-ui/react-slot` removed;
