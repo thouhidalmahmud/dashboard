@@ -11,6 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
+import { DataTableFilterClear } from '@/components/ui/table/data-table-filter-clear';
 
 interface Range {
   min: number;
@@ -120,21 +121,7 @@ export function DataTableSliderFilter<TData>({ column, title }: DataTableSliderF
     <Popover>
       <PopoverTrigger render={<Button variant='outline' size='sm' className='border-dashed' />}>
         {columnFilterValue ? (
-          <div
-            role='button'
-            aria-label={`Clear ${title} filter`}
-            tabIndex={0}
-            onClick={onReset}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onReset(event);
-              }
-            }}
-            className='focus-visible:ring-ring rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-1 focus-visible:outline-none'
-          >
-            <Icons.xCircle />
-          </div>
+          <DataTableFilterClear title={title} onReset={onReset} />
         ) : (
           <Icons.plusCircle />
         )}

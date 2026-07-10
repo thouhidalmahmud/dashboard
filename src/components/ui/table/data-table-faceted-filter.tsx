@@ -3,6 +3,7 @@
 import type { Option } from '@/types/data-table';
 import type { Column } from '@tanstack/react-table';
 import { Icons } from '@/components/icons';
+import { DataTableFilterClear } from '@/components/ui/table/data-table-filter-clear';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -74,21 +75,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger render={<Button variant='outline' size='sm' className='border-dashed' />}>
         {selectedValues?.size > 0 ? (
-          <div
-            role='button'
-            aria-label={`Clear ${title} filter`}
-            tabIndex={0}
-            onClick={onReset}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onReset(event);
-              }
-            }}
-            className='focus-visible:ring-ring rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-1 focus-visible:outline-none'
-          >
-            <Icons.xCircle />
-          </div>
+          <DataTableFilterClear title={title} onReset={onReset} />
         ) : (
           <Icons.plusCircle />
         )}

@@ -2,6 +2,7 @@
 
 import type { Column } from '@tanstack/react-table';
 import { Icons } from '@/components/icons';
+import { DataTableFilterClear } from '@/components/ui/table/data-table-filter-clear';
 import * as React from 'react';
 import type { DateRange } from 'react-day-picker';
 
@@ -163,25 +164,7 @@ export function DataTableDateFilter<TData>({
   return (
     <Popover>
       <PopoverTrigger render={<Button variant='outline' size='sm' className='border-dashed' />}>
-        {hasValue ? (
-          <div
-            role='button'
-            aria-label={`Clear ${title} filter`}
-            tabIndex={0}
-            onClick={onReset}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onReset(event);
-              }
-            }}
-            className='focus-visible:ring-ring rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-1 focus-visible:outline-none'
-          >
-            <Icons.xCircle />
-          </div>
-        ) : (
-          <Icons.calendar />
-        )}
+        {hasValue ? <DataTableFilterClear title={title} onReset={onReset} /> : <Icons.calendar />}
         {label}
       </PopoverTrigger>
       <PopoverContent className='w-auto p-0' align='start'>

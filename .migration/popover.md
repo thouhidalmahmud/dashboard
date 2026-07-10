@@ -14,6 +14,10 @@ keydown support; `onReset` signatures widened to `MouseEvent | KeyboardEvent`
 and the slider filter's div-only stopPropagation guard made unconditional (so
 clearing never toggles the popover).
 
+FIX 2026-07-11 (code review): the clear-x affordance duplicated across the three
+filter files was extracted to a shared DataTableFilterClear
+(src/components/ui/table/data-table-filter-clear.tsx); behavior unchanged.
+
 ## Changed
 
 - `src/components/ui/popover.tsx` — import → `@base-ui/react/popover`. Content:
