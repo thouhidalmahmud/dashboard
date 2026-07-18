@@ -141,7 +141,7 @@ const midActivation: ThouhidScenario = {
     tier: 'professional',
     currency: DEFAULT_CURRENCY,
     minuteAllowance: PLAN_TIERS.professional.minuteAllowance,
-    minutesUsed: 270,
+    minutesUsed: 90,
     extraNumbers: 0,
     extraLocations: 0,
     paygRatePerMinute: PLAN_TIERS.professional.paygRatePerMinute,

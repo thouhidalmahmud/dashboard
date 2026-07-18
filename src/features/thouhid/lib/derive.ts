@@ -78,3 +78,48 @@ export function attentionStalledState(
 export function callsProtected(calls: Pick<Call, 'outcome'>[]): number {
   return calls.filter((c) => c.outcome !== 'failed').length;
 }
+
+/* --------------------------- Recommendations ------------------------------ */
+
+export interface Recommendation {
+  id: string;
+  title: string;
+  detail: string;
+  href?: string;
+}
+
+/**
+ * Derive forward-looking optimization suggestions. Deliberately does NOT
+ * duplicate the attention queue (act-now items) or the plan-usage card's
+ * >=95% CTA: the usage nudge here fires only in the 80-95% notice band.
+ */
+export function deriveRecommendations(input: {
+  activation: ActivationProgress;
+  usage: Pick<PlanUsage, 'minutesUsed' | 'minuteAllowance'>;
+}): Recommendation[] {
+  const recs: Recommendation[] = [];
+  const { actionReached, noticeReached } = usageThresholds(input.usage);
+
+  const activeStep = input.activation.steps[input.activation.currentIndex];
+  if (activeStep && activeStep.state !== 'active') {
+    recs.push({
+      id: 'finish-activation',
+      title: 'Finish setting up',
+      detail: 'Complete the remaining activation steps to go live.',
+      href: '/dashboard/agent'
+    });
+  }
+
+  // Proactive nudge only in the 80-95% band; the >=95% action lives on the
+  // plan-usage card, so we intentionally skip it here to avoid duplication.
+  if (noticeReached && !actionReached) {
+    recs.push({
+      id: 'usage-review',
+      title: 'Review your minute usage',
+      detail: 'You have used most of your included minutes this period.',
+      href: '/dashboard/insights'
+    });
+  }
+
+  return recs;
+}
