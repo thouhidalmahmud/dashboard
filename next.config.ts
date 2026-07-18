@@ -67,3 +67,7 @@ if (!process.env.NEXT_PUBLIC_SENTRY_DISABLED) {
 
 const nextConfig = configWithPlugins;
 export default nextConfig;
+
+
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
+initOpenNextCloudflareForDev();
