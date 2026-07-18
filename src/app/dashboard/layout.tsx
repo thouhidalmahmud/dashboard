@@ -9,7 +9,7 @@ import { auth } from '@clerk/nextjs/server';
 import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
-  title: 'Next Shadcn Dashboard Starter',
+  title: 'THOUHID Dashboard',
   description: 'Basic dashboard with Next.js and Shadcn',
   robots: {
     index: false,
