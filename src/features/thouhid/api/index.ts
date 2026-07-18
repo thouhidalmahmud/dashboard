@@ -59,3 +59,5 @@ export async function getControlLevel(scenario?: ScenarioKey): Promise<Subscribe
 }
 
 export type { ScenarioKey } from './scenarios';
+
+export { SCENARIO_LABELS } from './scenarios';

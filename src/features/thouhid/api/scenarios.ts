@@ -380,3 +380,12 @@ export const SCENARIOS: Record<ScenarioKey, ThouhidScenario> = {
 
 /** Default scenario used when an accessor is called without a key. */
 export const DEFAULT_SCENARIO: ScenarioKey = 'midActivation';
+
+/** Human-friendly labels for each scenario (single source of truth for UI). */
+export const SCENARIO_LABELS: Record<ScenarioKey, string> = {
+  midActivation: 'Mid-activation',
+  activeHealthy: 'Active & healthy',
+  degraded: 'Service degraded',
+  disconnected: 'Service disconnected',
+  unavailable: 'Data unavailable'
+};

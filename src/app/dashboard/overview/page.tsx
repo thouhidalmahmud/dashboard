@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import PageContainer from '@/components/layout/page-container';
 import {
   getActivationProgress,
@@ -16,6 +17,7 @@ import { OutcomesSummary } from '@/features/thouhid/components/outcomes-summary'
 import { RecentActivity } from '@/features/thouhid/components/recent-activity';
 import { Recommendations } from '@/features/thouhid/components/recommendations';
 import { PlanUsageCard } from '@/features/thouhid/components/plan-usage-card';
+import { ScenarioSwitcher } from '@/features/thouhid/components/scenario-switcher';
 
 export const metadata = {
   title: 'Dashboard: Home'
@@ -42,6 +44,7 @@ function resolveScenario(value?: string): ScenarioKey | undefined {
 export default async function Page(props: PageProps) {
   const { scenario } = await props.searchParams;
   const key = resolveScenario(scenario);
+  const showSwitcher = process.env.NODE_ENV !== 'production';
 
   const [status, attention, calls, leads, appointments, activation, usage] = await Promise.all([
     getServiceStatus(key),
@@ -58,6 +61,11 @@ export default async function Page(props: PageProps) {
   return (
     <PageContainer pageTitle='Home' pageDescription='Your service at a glance.'>
       <div className='flex flex-1 flex-col gap-4'>
+        {showSwitcher && (
+          <Suspense fallback={null}>
+            <ScenarioSwitcher />
+          </Suspense>
+        )}
         <ServiceStatusCard status={status} />
         <AttentionQueue items={attention} />
         <OutcomesSummary calls={calls} leads={leads} appointments={appointments} />
