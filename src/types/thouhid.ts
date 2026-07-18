@@ -172,22 +172,30 @@ export type SubscriberControlLevel = 'direct' | 'guided' | 'thouhid_managed';
 export type CapabilityTier = 'essential' | 'professional' | 'premium';
 
 /**
- * Plan and raw usage FACTS only. Derived values — percent used, whether the
- * 80% notice / 95% action thresholds are reached — are computed in helpers
- * using the threshold constants from the plan config.
+ * Plan and raw usage FACTS only. Billing is metered by CALL MINUTES.
+ * Call *count* is tracked separately for outcomes/metrics (see Call/CallOutcome),
+ * not for billing. Derived values — percent used, whether the 80% notice / 95%
+ * action thresholds are reached — are computed in helpers using the threshold
+ * constants from the plan config.
+ * Billing rule: each call is rounded UP to whole minutes (ceil(durationSeconds/60)),
+ * then summed. `minutesUsed` is that already-rounded billable total; exact seconds
+ * are preserved on Call.durationSeconds for analytics and disputes.
  */
 export interface PlanUsage {
   tier: CapabilityTier;
   /** ISO 4217 currency code, e.g. "USD". */
   currency: string;
-  /** Included calls this period (whole number). */
-  callAllowance: number;
-  /** Calls used this period. */
-  callsUsed: number;
+  /** Included call minutes this period (whole number). */
+  minuteAllowance: number;
+  /** Billable call minutes used this period (whole number, already rounded). */
+  minutesUsed: number;
   extraNumbers: number;
   extraLocations: number;
-  /** Pay-as-you-go rate per extra call (placeholder value). */
-  paygRatePerCall: Money;
+  /**
+   * Pay-as-you-go rate per extra MINUTE, in dollars.
+   * Not `Money`: rates may be fractional (e.g. 0.15), unlike whole-unit prices.
+   */
+  paygRatePerMinute: number;
   /** ISO date the current billing period ends. */
   periodEndsAt: string;
 }
