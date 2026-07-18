@@ -42,6 +42,8 @@ import {
   IconFileZip,
   IconFolder,
   IconGripVertical,
+  IconHeadset,
+  IconChartBar,
   IconHelpCircle,
   IconInfoCircle,
   IconItalic,
@@ -146,6 +148,7 @@ export const Icons = {
   chat: IconMessage,
   notification: IconBell,
   phone: IconPhone,
+  headset: IconHeadset,
   video: IconVideo,
   send: IconSend,
   paperclip: IconPaperclip,
@@ -196,6 +199,7 @@ export const Icons = {
   // Data / Charts
   trendingDown: IconTrendingDown,
   trendingUp: IconTrendingUp,
+  chart: IconChartBar,
   eyeOff: IconEyeOff,
   adjustments: IconAdjustmentsHorizontal,
 
